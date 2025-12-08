@@ -8,6 +8,6 @@ target_include_directories(test_gauss_seidel_c PRIVATE ${CMAKE_SOURCE_DIR}/inter
 
 add_executable(test_gauss_seidel_cxx test_gauss_seidel.cpp $<TARGET_OBJECTS:fortran_objs>)
 target_include_directories(test_gauss_seidel_cxx PRIVATE ${CMAKE_SOURCE_DIR}/interface)
+target_link_libraries(test_gauss_seidel_cxx PRIVATE m Catch2::Catch2WithMain)
 
-target_link_libraries(test_gauss_seidel_c PRIVATE m)
-target_link_libraries(test_gauss_seidel_cxx PRIVATE m)
+enable_testing()

@@ -1,8 +1,10 @@
-#include <iostream>
+#define CATCH_CONFIG_MAIN
+#include <catch2/catch_all.hpp>
+#include <cstdio>
 #include <complex>
 #include "gauss-seidel.h"
 
-void test_float() {
+TEST_CASE("SGSSV - SINGLE PRECISION GAUSS-SEIDEL SOLVER", "[FLOAT32]") {
     int N = 4;
     float A[16] = {
         10.0f, -1.0f, 2.0f, 0.0f,
@@ -16,13 +18,23 @@ void test_float() {
     float tol = 1e-4f;
     int status;
 
+    printf("\n");
+    printf("--- TEST CASE ---\n");
+    printf("SGSSV - SINGLE PRECISION GAUSS-SEIDEL SOLVER\n");
+    printf("\n");
+
     GAUSS_SEIDEL(&N, A, B, X, &max_iter, &tol, &status);
 
-    std::cout << "\n--- SGSSV (float) ---\nStatus: " << status << "\n";
-    for (int i = 0; i < N; i++) std::cout << "X[" << i << "] = " << X[i] << "\n";
+    for (int i = 0; i < N; i++) printf("X[%d] = %.6f\n", i, X[i]);
+
+    REQUIRE(status == 0);
+    REQUIRE_THAT(X[0], Catch::Matchers::WithinAbs(1.0f, 1e-5f));
+    REQUIRE_THAT(X[1], Catch::Matchers::WithinAbs(2.0f, 1e-5f));
+    REQUIRE_THAT(X[2], Catch::Matchers::WithinAbs(-1.0f, 1e-5f));
+    REQUIRE_THAT(X[3], Catch::Matchers::WithinAbs(1.0f, 1e-5f));
 }
 
-void test_double() {
+TEST_CASE("DGSSV - DOUBLE PRECISION GAUSS-SEIDEL SOLVER", "[FLOAT64]") {
     int N = 4;
     double A[16] = {
         10.0, -1.0, 2.0, 0.0,
@@ -36,13 +48,23 @@ void test_double() {
     double tol = 1e-10;
     int status;
 
+    printf("\n");
+    printf("--- TEST CASE ---\n");
+    printf("DGSSV - DOUBLE PRECISION GAUSS-SEIDEL SOLVER\n");
+    printf("\n");
+
     GAUSS_SEIDEL(&N, A, B, X, &max_iter, &tol, &status);
 
-    std::cout << "\n--- DGSSV (double) ---\nStatus: " << status << "\n";
-    for (int i = 0; i < N; i++) std::cout << "X[" << i << "] = " << X[i] << "\n";
+    for (int i = 0; i < N; i++) printf("X[%d] = %.12lf\n", i, X[i]);
+
+    REQUIRE(status == 0);
+    REQUIRE_THAT(X[0], Catch::Matchers::WithinAbs(1.0, 1e-10));
+    REQUIRE_THAT(X[1], Catch::Matchers::WithinAbs(2.0, 1e-10));
+    REQUIRE_THAT(X[2], Catch::Matchers::WithinAbs(-1.0, 1e-10));
+    REQUIRE_THAT(X[3], Catch::Matchers::WithinAbs(1.0, 1e-10));
 }
 
-void test_cfloat() {
+TEST_CASE("CGSSV - COMPLEX FLOAT GAUSS-SEIDEL SOLVER", "[COMPLEX64]") {
     using cf = std::complex<float>;
     int N = 4;
     cf A[16] = {
@@ -57,13 +79,29 @@ void test_cfloat() {
     float tol = 1e-4f;
     int status;
 
+    printf("\n");
+    printf("--- TEST CASE ---\n");
+    printf("CGSSV - COMPLEX FLOAT GAUSS-SEIDEL SOLVER\n");
+    printf("\n");
+
     GAUSS_SEIDEL(&N, A, B, X, &max_iter, &tol, &status);
 
-    std::cout << "\n--- CGSSV (complex float) ---\nStatus: " << status << "\n";
-    for (int i = 0; i < N; i++) std::cout << "X[" << i << "] = " << X[i] << "\n";
+    for (int i = 0; i < N; i++) {
+        printf("X[%d] = (%.6f, %.6f)\n", i, X[i].real(), X[i].imag());
+    }
+
+    REQUIRE(status == 0);
+    REQUIRE_THAT(X[0].real(), Catch::Matchers::WithinAbs(0.995412f, 1e-5f));
+    REQUIRE_THAT(X[0].imag(), Catch::Matchers::WithinAbs(-0.028752f, 1e-5f));
+    REQUIRE_THAT(X[1].real(), Catch::Matchers::WithinAbs(2.018524f, 1e-5f));
+    REQUIRE_THAT(X[1].imag(), Catch::Matchers::WithinAbs(0.081610f, 1e-5f));
+    REQUIRE_THAT(X[2].real(), Catch::Matchers::WithinAbs(-0.982175f, 1e-5f));
+    REQUIRE_THAT(X[2].imag(), Catch::Matchers::WithinAbs(0.186858f, 1e-5f));
+    REQUIRE_THAT(X[3].real(), Catch::Matchers::WithinAbs(0.963693f, 1e-5f));
+    REQUIRE_THAT(X[3].imag(), Catch::Matchers::WithinAbs(-0.252708f, 1e-5f));
 }
 
-void test_cdouble() {
+TEST_CASE("ZGSSV - COMPLEX DOUBLE GAUSS-SEIDEL SOLVER", "[COMPLEX128]") {
     using cd = std::complex<double>;
     int N = 4;
     cd A[16] = {
@@ -78,16 +116,24 @@ void test_cdouble() {
     double tol = 1e-12;
     int status;
 
+    printf("\n");
+    printf("--- TEST CASE ---\n");
+    printf("ZGSSV - COMPLEX DOUBLE GAUSS-SEIDEL SOLVER\n");
+    printf("\n");
+
     GAUSS_SEIDEL(&N, A, B, X, &max_iter, &tol, &status);
 
-    std::cout << "\n--- ZGSSV (complex double) ---\nStatus: " << status << "\n";
-    for (int i = 0; i < N; i++) std::cout << "X[" << i << "] = " << X[i] << "\n";
-}
+    for (int i = 0; i < N; i++) {
+        printf("X[%d] = (%.12lf, %.12lf)\n", i, X[i].real(), X[i].imag());
+    }
 
-int main() {
-    test_float();
-    test_double();
-    test_cfloat();
-    test_cdouble();
-    return 0;
+    REQUIRE(status == 0);
+    REQUIRE_THAT(X[0].real(), Catch::Matchers::WithinAbs(0.995412230296, 1e-11));
+    REQUIRE_THAT(X[0].imag(), Catch::Matchers::WithinAbs(-0.028751867347, 1e-11));
+    REQUIRE_THAT(X[1].real(), Catch::Matchers::WithinAbs(2.018524356148, 1e-11));
+    REQUIRE_THAT(X[1].imag(), Catch::Matchers::WithinAbs(0.081609612259, 1e-11));
+    REQUIRE_THAT(X[2].real(), Catch::Matchers::WithinAbs(-0.982174907078, 1e-11));
+    REQUIRE_THAT(X[2].imag(), Catch::Matchers::WithinAbs(0.186858027715, 1e-11));
+    REQUIRE_THAT(X[3].real(), Catch::Matchers::WithinAbs(0.963693005950, 1e-11));
+    REQUIRE_THAT(X[3].imag(), Catch::Matchers::WithinAbs(-0.252707976877, 1e-11));
 }
