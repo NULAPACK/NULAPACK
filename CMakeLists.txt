@@ -17,4 +17,17 @@ SYSTEM_INFO()
 
 add_subdirectory(src)
 add_subdirectory(interface)
-add_subdirectory(tests)
+
+option(BUILD_TEST "Build tests" OFF)
+
+if(BUILD_TEST)
+    include(FetchContent)
+    FetchContent_Declare(
+        catch2
+        GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+        GIT_TAG v3.5.4
+    )
+    FetchContent_MakeAvailable(catch2)
+
+    add_subdirectory(tests)
+endif()
