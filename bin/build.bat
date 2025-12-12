@@ -107,6 +107,26 @@ if %TEST%==1 (
         exit /b 1
     )
     popd
+
+    pip install .[dev] -v --log build.log || (
+        echo Install failed
+        exit /b 1
+    )
+
+    bin\test_gauss_seidel_c || (
+        echo C tests failed
+        exit /b 1
+    )
+
+    bin\test_gauss_seidel_cxx || (
+        echo C++ tests failed
+        exit /b 1
+    )
+
+    pytest -s || (
+        echo Python tests failed
+        exit /b 1
+    )
 )
 
 :: INSTALL

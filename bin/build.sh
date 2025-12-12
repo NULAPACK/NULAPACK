@@ -75,6 +75,12 @@ if [ $TEST -eq 1 ]; then
     cd build || { echo "Cannot change directory to build"; exit 1; }
     make || { echo "Build failed"; exit 1; }
     cd .. || { echo "Cannot change back to project root"; exit 1; }
+
+    pip install .[dev] -v --log build.log || { echo "Install failed"; exit 1; }
+
+    bin/test_gauss_seidel_c || { echo "C Tests failed"; exit 1; }
+    bin/test_gauss_seidel_cxx || { echo "C++ Tests failed"; exit 1; }
+    pytest -s || { echo "Python Tests failed"; exit 1; }
 fi
 
 # INSTALL

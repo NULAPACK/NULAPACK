@@ -75,6 +75,18 @@ if ($args->{test}) {
     chdir "build" or die "Cannot change directory to build\n";
     system("make") == 0 or die "Build failed\n";
     chdir ".." or die "Cannot change back to project root\n";
+
+    system("pip install .[dev] -v --log build.log") == 0
+        or die "Install failed\n";
+
+    system("./bin/test_gauss_seidel_c") == 0
+        or die "C tests failed\n";
+
+    system("./bin/test_gauss_seidel_cxx") == 0
+        or die "C++ tests failed\n";
+
+    system("pytest -s") == 0
+        or die "Python tests failed\n";
 }
 
 if ($args->{install}) {
