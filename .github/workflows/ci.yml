@@ -55,11 +55,11 @@ jobs:
 
     - name: Build and test project
       run: |
-        python bin/build.py test
+        python bin/build.py test --build-tests --with-py
 
     - name: Install Python package (dev)
       run: |
-        python bin/build.py develop
+        python bin/build.py develop --build-tests --with-py
 
     - name: Run C tests
       if: always()
@@ -103,7 +103,7 @@ jobs:
     - name: Install linting tools
       run: |
         python -m pip install --upgrade pip
-        pip install ruff
+        pip install ruff==0.14.9
 
     - name: Run Ruff
       run: |
