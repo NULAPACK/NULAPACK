@@ -67,7 +67,7 @@ def run_command(command, cwd=None):
     logger.info("Command executed successfully.")
 
 
-def build(with_tests=False):
+def build(build_tests=False):
     cmake_cmd = "cmake -S . -B build"
     version = (
         subprocess.run(
@@ -83,7 +83,7 @@ def build(with_tests=False):
     if sys.platform == "win32":
         cmake_cmd += "  -G 'MinGW Makefiles'"
 
-    if with_tests:
+    if build_tests:
         cmake_cmd += " -DBUILD_TEST=ON"
     else:
         cmake_cmd += " -DBUILD_TEST=OFF"
@@ -104,16 +104,20 @@ def doxygen():
     run_command("doxygen Doxyfile")
 
 
-def develop():
-    build(with_tests=True)
-    run_command("pip install .[dev] -v --log build.log")
+def develop(build_tests=True, with_py=True):
+    build(build_tests=build_tests)
+    if with_py:
+        run_command("pip install .[dev] -v --log build.log")
 
 
-def test():
-    develop()
-    run_command("bin/test_gauss_seidel_c")
-    run_command("bin/test_gauss_seidel_cxx")
-    run_command("pytest -s")
+def test(build_tests=False, with_py=False):
+    develop(build_tests, with_py)
+
+    for file in Path(__file__).parent.glob("test_*"):
+        if file.is_file() and os.access(file, os.X_OK):
+            logger.info(f"Running {file.name} ...")
+            run_command(f"bin/{file.name}")
+    run_command("pytest -s -v")
 
 
 def clean():
@@ -158,6 +162,16 @@ def main():
         type=str,
         choices=["build", "install", "wheel", "doxygen", "develop", "test", "clean"],
     )
+    parser.add_argument(
+        "--build-tests",
+        action="store_true",
+        help="Enable building and running tests",
+    )
+    parser.add_argument(
+        "--with-py",
+        action="store_true",
+        help="Build/install the Python interface",
+    )
 
     args = parser.parse_args()
 
@@ -166,7 +180,7 @@ def main():
         sys.exit(0)
 
     if args.mode == "build":
-        build(with_tests=False)
+        build(build_tests=args.build_tests)
     if args.mode == "install":
         install()
     if args.mode == "wheel":
@@ -174,9 +188,9 @@ def main():
     if args.mode == "doxygen":
         doxygen()
     if args.mode == "develop":
-        develop()
+        develop(args.build_tests, args.with_py)
     if args.mode == "test":
-        test()
+        test(args.build_tests, args.with_py)
     if args.mode == "clean":
         clean()
 

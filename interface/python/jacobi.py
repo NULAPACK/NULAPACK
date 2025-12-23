@@ -2,9 +2,9 @@ import _nulapack
 import numpy as np
 
 
-def gauss_seidel(a, b, max_iter=1000, tol=1e-8, omega=1.0):
+def jacobi(a, b, max_iter=1000, tol=1e-8, omega=1.0):
     """
-    Solve the linear system ax = b using the Gauss-Seidel method.
+    Solve the linear system ax = b using the Jacobi method.
 
     Parameters
     ----------
@@ -36,14 +36,14 @@ def gauss_seidel(a, b, max_iter=1000, tol=1e-8, omega=1.0):
 
     if np.issubdtype(a.dtype, np.floating):
         if a.dtype == np.float32:
-            status = _nulapack.sgegssv(a_flat, b, x, max_iter, tol, omega, 0, n)
+            status = _nulapack.sgejsv(a_flat, b, x, max_iter, tol, omega, 0, n)
         else:  # float64
-            status = _nulapack.dgegssv(a_flat, b, x, max_iter, tol, omega, 0, n)
+            status = _nulapack.dgejsv(a_flat, b, x, max_iter, tol, omega, 0, n)
     elif np.issubdtype(a.dtype, np.complexfloating):
         if a.dtype == np.complex64:
-            status = _nulapack.cgegssv(a_flat, b, x, max_iter, tol, omega, 0, n)
+            status = _nulapack.cgejsv(a_flat, b, x, max_iter, tol, omega, 0, n)
         else:  # complex128
-            status = _nulapack.zgegssv(a_flat, b, x, max_iter, tol, omega, 0, n)
+            status = _nulapack.zgejsv(a_flat, b, x, max_iter, tol, omega, 0, n)
     else:
         raise TypeError(f"Unsupported array dtype: {a.dtype}")
 

@@ -2,9 +2,9 @@
 #include <catch2/catch_all.hpp>
 #include <cstdio>
 #include <complex>
-#include "GaussSeidel.h"
+#include "Jacobi.h"
 
-TEST_CASE("SGEGSSV - SINGLE PRECISION GAUSS-SEIDEL SOLVER", "[FLOAT32]") {
+TEST_CASE("SGEJSV - SINGLE PRECISION JACOBI SOLVER", "[FLOAT32]") {
     int N = 4;
     float A[16] = {
         10.0f, -1.0f, 2.0f, 0.0f,
@@ -15,15 +15,15 @@ TEST_CASE("SGEGSSV - SINGLE PRECISION GAUSS-SEIDEL SOLVER", "[FLOAT32]") {
     float B[4] = {6.0f, 25.0f, -11.0f, 15.0f};
     float X[4] = {};
     int max_iter = 1000;
-    float tol = 1e-4f;
+    float tol = 1e-6f;
     int status;
 
     printf("\n");
     printf("--- TEST CASE ---\n");
-    printf("SGEGSSV - SINGLE PRECISION GAUSS-SEIDEL SOLVER\n");
+    printf("SGEJSV - SINGLE PRECISION JACOBI SOLVER\n");
     printf("\n");
 
-    GAUSS_SEIDEL(&N, A, B, X, &max_iter, &tol, &status);
+    JACOBI(&N, A, B, X, &max_iter, &tol, &status);
 
     for (int i = 0; i < N; i++) printf("X[%d] = %.6f\n", i, X[i]);
 
@@ -34,7 +34,7 @@ TEST_CASE("SGEGSSV - SINGLE PRECISION GAUSS-SEIDEL SOLVER", "[FLOAT32]") {
     REQUIRE_THAT(X[3], Catch::Matchers::WithinAbs(1.0f, 1e-5f));
 }
 
-TEST_CASE("DGEGSSV - DOUBLE PRECISION GAUSS-SEIDEL SOLVER", "[FLOAT64]") {
+TEST_CASE("DGEJSV - DOUBLE PRECISION JACOBI SOLVER", "[FLOAT64]") {
     int N = 4;
     double A[16] = {
         10.0, -1.0, 2.0, 0.0,
@@ -50,10 +50,10 @@ TEST_CASE("DGEGSSV - DOUBLE PRECISION GAUSS-SEIDEL SOLVER", "[FLOAT64]") {
 
     printf("\n");
     printf("--- TEST CASE ---\n");
-    printf("DGEGSSV - DOUBLE PRECISION GAUSS-SEIDEL SOLVER\n");
+    printf("DGEJSV - DOUBLE PRECISION JACOBI SOLVER\n");
     printf("\n");
 
-    GAUSS_SEIDEL(&N, A, B, X, &max_iter, &tol, &status);
+    JACOBI(&N, A, B, X, &max_iter, &tol, &status);
 
     for (int i = 0; i < N; i++) printf("X[%d] = %.12lf\n", i, X[i]);
 
@@ -64,7 +64,7 @@ TEST_CASE("DGEGSSV - DOUBLE PRECISION GAUSS-SEIDEL SOLVER", "[FLOAT64]") {
     REQUIRE_THAT(X[3], Catch::Matchers::WithinAbs(1.0, 1e-10));
 }
 
-TEST_CASE("CGEGSSV - COMPLEX FLOAT GAUSS-SEIDEL SOLVER", "[COMPLEX64]") {
+TEST_CASE("CGEJSV - COMPLEX FLOAT JACOBI SOLVER", "[COMPLEX64]") {
     using cf = std::complex<float>;
     int N = 4;
     cf A[16] = {
@@ -76,15 +76,15 @@ TEST_CASE("CGEGSSV - COMPLEX FLOAT GAUSS-SEIDEL SOLVER", "[COMPLEX64]") {
     cf B[4] = { {6.0f, 1.0f}, {25.0f, 2.0f}, {-11.0f, 1.0f}, {15.0f, -1.0f} };
     cf X[4] = {};
     int max_iter = 1000;
-    float tol = 1e-4f;
+    float tol = 1e-6f;
     int status;
 
     printf("\n");
     printf("--- TEST CASE ---\n");
-    printf("CGEGSSV - COMPLEX FLOAT GAUSS-SEIDEL SOLVER\n");
+    printf("CGEJSV - COMPLEX FLOAT JACOBI SOLVER\n");
     printf("\n");
 
-    GAUSS_SEIDEL(&N, A, B, X, &max_iter, &tol, &status);
+    JACOBI(&N, A, B, X, &max_iter, &tol, &status);
 
     for (int i = 0; i < N; i++) {
         printf("X[%d] = (%.6f, %.6f)\n", i, X[i].real(), X[i].imag());
@@ -101,7 +101,7 @@ TEST_CASE("CGEGSSV - COMPLEX FLOAT GAUSS-SEIDEL SOLVER", "[COMPLEX64]") {
     REQUIRE_THAT(X[3].imag(), Catch::Matchers::WithinAbs(-0.252708f, 1e-5f));
 }
 
-TEST_CASE("ZGEGSSV - COMPLEX DOUBLE GAUSS-SEIDEL SOLVER", "[COMPLEX128]") {
+TEST_CASE("ZGEJSV - COMPLEX DOUBLE JACOBI SOLVER", "[COMPLEX128]") {
     using cd = std::complex<double>;
     int N = 4;
     cd A[16] = {
@@ -118,10 +118,10 @@ TEST_CASE("ZGEGSSV - COMPLEX DOUBLE GAUSS-SEIDEL SOLVER", "[COMPLEX128]") {
 
     printf("\n");
     printf("--- TEST CASE ---\n");
-    printf("ZGEGSSV - COMPLEX DOUBLE GAUSS-SEIDEL SOLVER\n");
+    printf("ZGEJSV - COMPLEX DOUBLE JACOBI SOLVER\n");
     printf("\n");
 
-    GAUSS_SEIDEL(&N, A, B, X, &max_iter, &tol, &status);
+    JACOBI(&N, A, B, X, &max_iter, &tol, &status);
 
     for (int i = 0; i < N; i++) {
         printf("X[%d] = (%.12lf, %.12lf)\n", i, X[i].real(), X[i].imag());
