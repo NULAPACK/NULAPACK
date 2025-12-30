@@ -26,6 +26,7 @@ py_mod_name = 'nulapack'
 fortran_sources = run_command(py, ['-c',
     'import glob; print(" ".join(glob.glob("../../src/*.f")))'
 ], check: true).stdout().strip().split()
+message('Fortran sources: ', fortran_sources)
 
 f2py_target = custom_target(
   py_mod_name + '_f2py',
@@ -51,6 +52,7 @@ py.extension_module(
 python_sources = run_command(py, ['-c',
     'import glob; print(" ".join(glob.glob("*.py")))'
 ], check: true).stdout().strip().split()
+message('Python sources: ', python_sources)
 
 py.install_sources(
   python_sources,

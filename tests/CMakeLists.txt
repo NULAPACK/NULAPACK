@@ -1,13 +1,14 @@
 get_property(FORTRAN_SOURCES GLOBAL PROPERTY FORTRAN_SOURCES)
-get_property(HEADER_FILES GLOBAL PROPERTY HEADER_FILES)
-
 add_library(fortran_objs OBJECT ${FORTRAN_SOURCES})
 
-add_executable(test_gauss_seidel_c test_gauss_seidel.c $<TARGET_OBJECTS:fortran_objs>)
-target_include_directories(test_gauss_seidel_c PRIVATE ${CMAKE_SOURCE_DIR}/interface)
+file(GLOB TEST_SOURCES CONFIGURE_DEPENDS *.cpp)
 
-add_executable(test_gauss_seidel_cxx test_gauss_seidel.cpp $<TARGET_OBJECTS:fortran_objs>)
-target_include_directories(test_gauss_seidel_cxx PRIVATE ${CMAKE_SOURCE_DIR}/interface)
-target_link_libraries(test_gauss_seidel_cxx PRIVATE m Catch2::Catch2WithMain)
+foreach(src ${TEST_SOURCES})
+    get_filename_component(name ${src} NAME_WE)
+
+    add_executable(${name} ${src} $<TARGET_OBJECTS:fortran_objs>)
+    target_include_directories(${name} PRIVATE ${CMAKE_SOURCE_DIR}/interface)
+    target_link_libraries(${name} PRIVATE m Catch2::Catch2WithMain)
+endforeach()
 
 enable_testing()
