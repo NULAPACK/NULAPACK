@@ -61,14 +61,20 @@ CMakeUserPresets.json
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #cmake-build-*
 
-# Others
-mangling.h
-.vscode
-/bin/test_*
+# Build
+bin/test_*
 lib
 build
 dist
+wheels
+
 *.egg-info
-__pycache__/
-*.log
+__pycache__
+*.py[codz]
+*$py.class
+
+mangling.h
 _version.py
+
+*.log
+.vscode
