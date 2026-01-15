@@ -123,7 +123,7 @@ def test(build_tests=False, with_py=False):
 def clean():
     logger.debug("Starting cleanup ...")
 
-    run_command("uv pip uninstall nulapack -y")
+    run_command("uv pip uninstall nulapack")
 
     for entry in Path("").iterdir():
         if entry.name in ["dist", "build", "lib", ".pytest_cache", ".ruff_cache"]:
