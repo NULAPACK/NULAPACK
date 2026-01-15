@@ -1,2 +1,157 @@
-# NULAPACK
-NUmerical Linear Algebra PACKage
+# NULAPACK: NUmerical Linear Algebra PACKage
+
+NULAPACK is a lightweight, high-performance numerical linear algebra library. It provides a set of core subroutines implemented in Fortran for efficiency, with convenient C++ and Python interfaces.
+
+## Installation
+
+`nulapack` can be installed from **PyPI** or built **from source**.
+Using **uv** is recommended for fast and reproducible environments.
+
+---
+
+### Install from PyPI
+
+**Using `pip`**
+
+System-wide (user install):
+
+```bash
+pip install --upgrade --user nulapack
+```
+
+You may need to use `pip3` instead of `pip` depending on your Python installation.
+
+Inside a virtual environment:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install --upgrade nulapack
+```
+
+---
+
+**Using `uv` (recommended)**
+
+Install into a new environment:
+
+```bash
+uv venv
+source .venv/bin/activate
+uv pip install nulapack
+```
+
+Add to an existing `uv` project:
+
+```bash
+uv add nulapack
+uv sync
+```
+
+---
+
+**Using `pipenv`**
+
+```bash
+pipenv install nulapack
+```
+
+---
+
+**Using `poetry`**
+
+```bash
+poetry add nulapack
+```
+
+---
+
+**Using `hatch`**
+
+```bash
+hatch add nulapack
+```
+
+---
+
+### Declaring as a Dependency
+
+`pyproject.toml`:
+
+```toml
+[project.dependencies]
+nulapack = ">=1.0.0"
+```
+
+`requirements.txt`:
+
+```text
+nulapack>=1.0.0
+```
+
+---
+
+### Building from Source
+
+Building from source is useful if you want the latest features or need to modify the Fortran core.
+
+**Prerequisites**
+
+* CMake ≥ 3.10
+* Fortran compiler (e.g. `gfortran`)
+* C/C++ compiler (e.g. `gcc`, `clang`)
+* Python ≥ 3.8
+* uv
+
+**Build and install**
+
+```bash
+git clone https://github.com/NULAPACK/NULAPACK.git
+cd NULAPACK
+
+uv venv
+source .venv/bin/activate
+
+uv run bin/build.py develop --with-py
+```
+
+---
+
+## Usage
+
+**Python**
+
+```python
+import numpy as np
+from nulapack import doolittle
+
+A = np.array([[4, 3], [6, 3]], dtype=np.float64)
+L, U, info = doolittle(A)
+
+if info == 0:
+    print("L:\n", L)
+    print("U:\n", U)
+```
+
+**C++**
+
+```cpp
+#include <iostream>
+#include <vector>
+#include "Doolittle.h"
+
+int main() {
+    int n = 2;
+    std::vector<double> a = {4, 3, 6, 3};
+    std::vector<double> l(n * n, 0.0);
+    std::vector<double> u(n * n, 0.0);
+    int info;
+
+    DOOLITTLE(&n, a.data(), l.data(), u.data(), &info);
+
+    if (info == 0) {
+        // Use l and u
+    }
+    return 0;
+}
+```
