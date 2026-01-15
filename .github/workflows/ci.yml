@@ -41,7 +41,7 @@ jobs:
     - name: Install Python dependencies
       run: |
         pip install uv
-        uv pip install meson meson-python ninja numpy pytest
+        uv pip install --system meson meson-python ninja numpy pytest
 
     - name: Check compilers
       run: |
@@ -53,19 +53,15 @@ jobs:
       run: |
         uv run bin/build.py build
 
-    - name: Build and test project
+    - name: Test project
       run: |
         uv run bin/build.py test --build-tests --with-py
 
-    - name: Install Python package (dev)
+    - name: Install project
       run: |
         uv run bin/build.py develop --build-tests --with-py
 
-    - name: Run Python tests
-      if: always()
-      run: uv run pytest -s -v tests/
-
-    - name: Upload build artifacts
+    - name: Upload artifacts
       if: always()
       uses: actions/upload-artifact@v4
       with:
@@ -89,12 +85,12 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.11'
+        python-version: '3.13'
 
     - name: Install linting tools
       run: |
         pip install uv
-        uv pip install ruff==0.14.9
+        uv pip install --system ruff==0.14.*
 
     - name: Run Ruff
       run: |
