@@ -17,7 +17,7 @@ C     You should have received a copy of the GNU General Public License
 C     along with NULAPACK.  If not, see <https://www.gnu.org/licenses/>.
 C
 C     ====================================================================
-C       CPOCTRF  -  Cholesky Factorization for A = L * L^T (complex single)
+C       CPOCTRF  -  Cholesky Factorization for A = L * L^T
 C     ====================================================================
 C       Description:
 C       ------------------------------------------------------------------
