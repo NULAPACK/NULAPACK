@@ -17,7 +17,7 @@ C     You should have received a copy of the GNU General Public License
 C     along with NULAPACK.  If not, see <https://www.gnu.org/licenses/>.
 C
 C     ====================================================================
-C       ZPOCTRF  -  Cholesky Factorization for A = L * L^T (complex double)
+C       ZPOCTRF  -  Cholesky Factorization for A = L * L^T
 C     ====================================================================
 C       Description:
 C       ------------------------------------------------------------------
@@ -33,33 +33,34 @@ C       Arguments:
 C       ------------------------------------------------------------------
 C         N    : INTEGER       -> order of the matrix
 C         A(*) : COMPLEX*16    -> flat row-major matrix, size (LDA*N)
+C         L(*) : COMPLEX*16    -> flat row-major matrix, size (LDA*N)
 C         LDA  : INTEGER       -> leading dimension of A (usually N)
 C         INFO : INTEGER       -> return code:
 C                                0 = success
 C                               <0 = illegal argument
 C                               >0 = matrix not positive definite
 C     ====================================================================
-      SUBROUTINE ZPOCTRF(N, A, LDA, INFO)
+      SUBROUTINE ZPOCTRF(N, A, L, LDA, INFO)
 
-C   Implicit types
+C   I m p l i c i t   t y p e s
 C   ------------------------------------------------------------------
       IMPLICIT NONE
 
-C   Dummy arguments
+C   D u m m y   a r g u m e n t s
 C   ------------------------------------------------------------------
       INTEGER       :: N, LDA, INFO
-      COMPLEX*16    :: A(*)
+      COMPLEX*16    :: A(*), L(*)
 
-C   Local variables
+C   L o c a l   v a r i a b l e s
 C   ------------------------------------------------------------------
       INTEGER       :: I, J, K, INDEX
       COMPLEX*16    :: SUM
 
-C   Initialize
+C   I n i t i a l i z e
 C   ------------------------------------------------------------------
       INFO = 0
 
-C   Main loop over rows
+C   M a i n   l o o p   o v e r   r o w s
 C   ------------------------------------------------------------------
       DO I = 1, N
 
@@ -67,7 +68,7 @@ C       Compute diagonal element L(I,I)
          SUM = (0.0D0, 0.0D0)
          DO K = 1, I-1
             INDEX = (I-1)*LDA + K
-            SUM = SUM + A(INDEX)*DCONJG(A(INDEX))
+            SUM = SUM + L(INDEX)*DCONJG(L(INDEX))
          END DO
 
          INDEX = (I-1)*LDA + I
@@ -75,21 +76,21 @@ C       Compute diagonal element L(I,I)
             INFO = I
             RETURN
          END IF
-         A(INDEX) = ZSQRT(A(INDEX) - SUM)
+         L(INDEX) = ZSQRT(A(INDEX) - SUM)
 
 C       Compute off-diagonal elements L(J,I), J = I+1:N
          DO J = I+1, N
             SUM = (0.0D0, 0.0D0)
             DO K = 1, I-1
-               SUM = SUM + A((J-1)*LDA + K) * DCONJG(A((I-1)*LDA + K))
+               SUM = SUM + L((J-1)*LDA + K) * DCONJG(L((I-1)*LDA + K))
             END DO
             INDEX = (J-1)*LDA + I
-            A(INDEX) = (A(INDEX) - SUM)/A((I-1)*LDA + I)
+            L(INDEX) = (A(INDEX) - SUM)/L((I-1)*LDA + I)
          END DO
 
       END DO
 
-C   Successful exit
+C   S u c c e s s f u l   e x i t
 C   ------------------------------------------------------------------
       RETURN
       END
