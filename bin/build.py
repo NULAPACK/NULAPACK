@@ -93,11 +93,11 @@ def build(build_tests=False):
 
 
 def install():
-    run_command("pip install . -v --log build.log")
+    run_command("uv pip install . -v")
 
 
 def wheel():
-    run_command("pip wheel . -v -w dist --log build.log")
+    run_command("uv build -v")
 
 
 def doxygen():
@@ -107,7 +107,7 @@ def doxygen():
 def develop(build_tests=True, with_py=True):
     build(build_tests=build_tests)
     if with_py:
-        run_command("pip install .[dev] -v --log build.log")
+        run_command("uv pip install .[dev] -v")
 
 
 def test(build_tests=False, with_py=False):
@@ -123,7 +123,7 @@ def test(build_tests=False, with_py=False):
 def clean():
     logger.debug("Starting cleanup ...")
 
-    run_command("pip uninstall nulapack -y")
+    run_command("uv pip uninstall nulapack -y")
 
     for entry in Path("").iterdir():
         if entry.name in ["dist", "build", "lib", ".pytest_cache", ".ruff_cache"]:

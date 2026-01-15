@@ -2,9 +2,9 @@
 name = "nulapack"
 dynamic = ['version']
 description = "NUmerical Linear Algebra PACKage"
-readme = "README.md"
 authors = [{ name = "Saud Zahir", email = "m.saud.zahir@gmail.com" }]
-license = "GPL-3.0-or-later"
+readme = "README.md"
+license = {file = "LICENSE"}
 keywords = [
     "numerical",
     "linear",
@@ -12,31 +12,53 @@ keywords = [
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
-    "Intended Audience :: Education",
     "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
     'Programming Language :: Fortran',
     'Programming Language :: C',
     'Programming Language :: C++',
     "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development",
+    "Topic :: Scientific/Engineering",
     'Operating System :: Microsoft :: Windows',
     'Operating System :: POSIX',
     'Operating System :: Unix',
     'Operating System :: MacOS',
-    "Topic :: Education",
-    "Topic :: Scientific/Engineering :: Mathematics",
-    "Topic :: Scientific/Engineering :: Physics",
-    "Topic :: Software Development",
-    "Topic :: Utilities",
 ]
+requires-python = ">=3.8"
 
 dependencies = [
     "numpy",
 ]
 
-[project.optional-dependencies]
+[project.urls]
+source = "https://github.com/NULAPACK/NULAPACK"
+# TODO: add documentation URL
+# TODO: provide changelog URL from docs
+releasenotes = "https://github.com/NULAPACK/NULAPACK/releases/latest"
+issues = "https://github.com/NULAPACK/NULAPACK/issues"
+
+[dependency-groups]
 dev = [
-    "pytest",
-    "ruff==0.14.9",
+  {include-group = "lint"},
+  {include-group = "test"}
+]
+lint = [
+    "ruff==0.14.*",
+]
+test = [
+    "pytest>=8.3.5",
+    "pytest-xdist>=3.6.1",
 ]
 
 [build-system]
@@ -54,7 +76,7 @@ local_scheme = "no-local-version"
 
 [tool.ruff]
 
-required-version = "==0.14.9"
+required-version = "==0.14.*"
 line-length = 100
 indent-width = 4
 output-format = "grouped"

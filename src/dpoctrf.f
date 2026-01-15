@@ -41,25 +41,25 @@ C                                 >0 = matrix not positive definite
 C     ====================================================================
       SUBROUTINE DPOCTRF(N, A, LDA, INFO)
 
-C   Implicit types
+C   I m p l i c i t   t y p e s
 C   ------------------------------------------------------------------
       IMPLICIT NONE
 
-C   Dummy arguments
+C   D u m m y   a r g u m e n t s
 C   ------------------------------------------------------------------
       INTEGER          :: N, LDA, INFO
       DOUBLE PRECISION :: A(*)
 
-C   Local variables
+C   L o c a l   v a r i a b l e s
 C   ------------------------------------------------------------------
       INTEGER          :: I, J, K, INDEX
       DOUBLE PRECISION :: SUM
 
-C   Initialize
+C   I n i t i a l i z e
 C   ------------------------------------------------------------------
       INFO = 0
 
-C   Main loop over rows
+C   M a i n   l o o p   o v e r   r o w s
 C   ------------------------------------------------------------------
       DO I = 1, N
 
@@ -89,7 +89,7 @@ C       Compute off-diagonal elements L(J,I), J = I+1:N
 
       END DO
 
-C   Successful exit
+C   S u c c e s s f u l   e x i t
 C   ------------------------------------------------------------------
       RETURN
       END

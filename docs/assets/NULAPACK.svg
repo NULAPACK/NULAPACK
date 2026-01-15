@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <defs>
+    <style>
+      .red { fill: #ff1515; font-weight: bold; font-family: sans-serif; font-size: 32px; }
+      .blue { fill: #0000cb; font-weight: bold; font-family: sans-serif; font-size: 32px; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="400" fill="white"/>
+
+  <!-- Centered letters using bounding-box alignment -->
+  <g transform="translate(35,35)"> <!-- Adjusted left/top margin -->
+    <g id="letters">
+      <!-- Row spacing = 45px, top aligned with 'hanging' -->
+      <!-- Row 1 -->
+      <text x="0" y="0" class="red" dominant-baseline="hanging" text-anchor="start">N</text>
+      <text x="45" y="0" class="blue" dominant-baseline="hanging" text-anchor="start">U</text>
+      <text x="90" y="0" class="blue" dominant-baseline="hanging" text-anchor="start">L</text>
+      <text x="135" y="0" class="blue" dominant-baseline="hanging" text-anchor="start">A</text>
+      <text x="180" y="0" class="blue" dominant-baseline="hanging" text-anchor="start">P</text>
+      <text x="225" y="0" class="blue" dominant-baseline="hanging" text-anchor="start">A</text>
+      <text x="270" y="0" class="blue" dominant-baseline="hanging" text-anchor="start">C</text>
+      <text x="315" y="0" class="blue" dominant-baseline="hanging" text-anchor="start">K</text>
+
+      <!-- Row 2 -->
+      <text x="0" y="45" class="blue" dominant-baseline="hanging" text-anchor="start">U</text>
+      <text x="45" y="45" class="red" dominant-baseline="hanging" text-anchor="start">U</text>
+      <text x="90" y="45" class="blue" dominant-baseline="hanging" text-anchor="start">L</text>
+      <text x="135" y="45" class="blue" dominant-baseline="hanging" text-anchor="start">A</text>
+      <text x="180" y="45" class="blue" dominant-baseline="hanging" text-anchor="start">P</text>
+      <text x="225" y="45" class="blue" dominant-baseline="hanging" text-anchor="start">A</text>
+      <text x="270" y="45" class="blue" dominant-baseline="hanging" text-anchor="start">C</text>
+      <text x="315" y="45" class="blue" dominant-baseline="hanging" text-anchor="start">K</text>
+
+      <!-- Row 3 -->
+      <text x="0" y="90" class="blue" dominant-baseline="hanging" text-anchor="start">L</text>
+      <text x="45" y="90" class="blue" dominant-baseline="hanging" text-anchor="start">L</text>
+      <text x="90" y="90" class="red" dominant-baseline="hanging" text-anchor="start">L</text>
+      <text x="135" y="90" class="blue" dominant-baseline="hanging" text-anchor="start">A</text>
+      <text x="180" y="90" class="blue" dominant-baseline="hanging" text-anchor="start">P</text>
+      <text x="225" y="90" class="blue" dominant-baseline="hanging" text-anchor="start">A</text>
+      <text x="270" y="90" class="blue" dominant-baseline="hanging" text-anchor="start">C</text>
+      <text x="315" y="90" class="blue" dominant-baseline="hanging" text-anchor="start">K</text>
+
+      <!-- Row 4 -->
+      <text x="0" y="135" class="blue" dominant-baseline="hanging" text-anchor="start">A</text>
+      <text x="45" y="135" class="blue" dominant-baseline="hanging" text-anchor="start">A</text>
+      <text x="90" y="135" class="blue" dominant-baseline="hanging" text-anchor="start">A</text>
+      <text x="135" y="135" class="red" dominant-baseline="hanging" text-anchor="start">A</text>
+      <text x="180" y="135" class="blue" dominant-baseline="hanging" text-anchor="start">P</text>
+      <text x="225" y="135" class="blue" dominant-baseline="hanging" text-anchor="start">A</text>
+      <text x="270" y="135" class="blue" dominant-baseline="hanging" text-anchor="start">C</text>
+      <text x="315" y="135" class="blue" dominant-baseline="hanging" text-anchor="start">K</text>
+
+      <!-- Row 5 -->
+      <text x="0" y="180" class="blue" dominant-baseline="hanging" text-anchor="start">P</text>
+      <text x="45" y="180" class="blue" dominant-baseline="hanging" text-anchor="start">P</text>
+      <text x="90" y="180" class="blue" dominant-baseline="hanging" text-anchor="start">P</text>
+      <text x="135" y="180" class="blue" dominant-baseline="hanging" text-anchor="start">P</text>
+      <text x="180" y="180" class="red" dominant-baseline="hanging" text-anchor="start">P</text>
+      <text x="225" y="180" class="blue" dominant-baseline="hanging" text-anchor="start">A</text>
+      <text x="270" y="180" class="blue" dominant-baseline="hanging" text-anchor="start">C</text>
+      <text x="315" y="180" class="blue" dominant-baseline="hanging" text-anchor="start">K</text>
+
+      <!-- Row 6 -->
+      <text x="0" y="225" class="blue" dominant-baseline="hanging" text-anchor="start">A</text>
+      <text x="45" y="225" class="blue" dominant-baseline="hanging" text-anchor="start">A</text>
+      <text x="90" y="225" class="blue" dominant-baseline="hanging" text-anchor="start">A</text>
+      <text x="135" y="225" class="blue" dominant-baseline="hanging" text-anchor="start">A</text>
+      <text x="180" y="225" class="blue" dominant-baseline="hanging" text-anchor="start">A</text>
+      <text x="225" y="225" class="red" dominant-baseline="hanging" text-anchor="start">A</text>
+      <text x="270" y="225" class="blue" dominant-baseline="hanging" text-anchor="start">C</text>
+      <text x="315" y="225" class="blue" dominant-baseline="hanging" text-anchor="start">K</text>
+
+      <!-- Row 7 -->
+      <text x="0" y="270" class="blue" dominant-baseline="hanging" text-anchor="start">C</text>
+      <text x="45" y="270" class="blue" dominant-baseline="hanging" text-anchor="start">C</text>
+      <text x="90" y="270" class="blue" dominant-baseline="hanging" text-anchor="start">C</text>
+      <text x="135" y="270" class="blue" dominant-baseline="hanging" text-anchor="start">C</text>
+      <text x="180" y="270" class="blue" dominant-baseline="hanging" text-anchor="start">C</text>
+      <text x="225" y="270" class="blue" dominant-baseline="hanging" text-anchor="start">C</text>
+      <text x="270" y="270" class="red" dominant-baseline="hanging" text-anchor="start">C</text>
+      <text x="315" y="270" class="blue" dominant-baseline="hanging" text-anchor="start">K</text>
+
+      <!-- Row 8 -->
+      <text x="0" y="315" class="blue" dominant-baseline="hanging" text-anchor="start">K</text>
+      <text x="45" y="315" class="blue" dominant-baseline="hanging" text-anchor="start">K</text>
+      <text x="90" y="315" class="blue" dominant-baseline="hanging" text-anchor="start">K</text>
+      <text x="135" y="315" class="blue" dominant-baseline="hanging" text-anchor="start">K</text>
+      <text x="180" y="315" class="blue" dominant-baseline="hanging" text-anchor="start">K</text>
+      <text x="225" y="315" class="blue" dominant-baseline="hanging" text-anchor="start">K</text>
+      <text x="270" y="315" class="blue" dominant-baseline="hanging" text-anchor="start">K</text>
+      <text x="315" y="315" class="red" dominant-baseline="hanging" text-anchor="start">K</text>
+    </g>
+  </g>
+</svg>
+
