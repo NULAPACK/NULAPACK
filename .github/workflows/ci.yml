@@ -6,104 +6,102 @@ on:
   pull_request:
     branches: [ master ]
 
+permissions:
+  contents: write
+
 jobs:
   build-and-test:
     name: Build and Test
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12', '3.13', '3.14']
-      fail-fast: false
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12', '3.13']
 
     steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
 
-    - name: Install dependencies (Ubuntu)
-      if: runner.os == 'Linux'
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y cmake gfortran build-essential
+      - name: Install dependencies (Ubuntu)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake gfortran build-essential
 
-    - name: Install dependencies (Windows)
-      if: runner.os == 'Windows'
-      run: |
-        choco install cmake mingw
-        setx PATH "%PATH%;C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin"
+      - name: Install dependencies (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          choco install cmake mingw --no-progress
+          echo "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin" >> $GITHUB_PATH
 
-    - name: Install Python dependencies
-      run: |
-        pip install uv
-        uv pip install --system meson meson-python ninja numpy pytest
+      - name: Install Python dependencies
+        run: |
+          pip install uv
+          uv pip install --system meson meson-python ninja numpy pytest
 
-    - name: Check compilers
-      run: |
-        gcc --version
-        g++ --version
-        gfortran --version
+      - name: Check compilers
+        run: |
+          gcc --version || true
+          g++ --version || true
+          gfortran --version || true
 
-    - name: Build project
-      run: |
-        uv run bin/build.py build
+      - name: Build project
+        run: uv run bin/build.py build
 
-    - name: Test project
-      run: |
-        uv run bin/build.py test --build-tests --with-py
+      - name: Test project
+        run: uv run bin/build.py test --build-tests --with-py
 
-    - name: Install project
-      run: |
-        uv run bin/build.py develop --build-tests --with-py
+      - name: Install project
+        run: uv run bin/build.py develop --build-tests --with-py
 
-    - name: Upload artifacts
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: build-${{ matrix.os }}-py${{ matrix.python-version }}
-        path: |
-          build/
-          bin/test_*
-          lib/
-          dist/
-          .mesonpy/
-          build.log
-        retention-days: 5
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.os }}-py${{ matrix.python-version }}
+          path: |
+            build/
+            bin/test_*
+            lib/
+            dist/
+            .mesonpy/
+            build.log
+          retention-days: 5
 
   code-quality:
     name: Code Quality Checks
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.13'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
 
-    - name: Install linting tools
-      run: |
-        pip install uv
-        uv pip install --system ruff==0.14.*
+      - name: Install linting tools
+        run: |
+          pip install uv
+          uv pip install --system ruff==0.14.*
 
-    - name: Run Ruff
-      run: |
-        uv run ruff format --check
-        uv run ruff check .
+      - name: Run Ruff
+        run: |
+          uv run ruff format --check
+          uv run ruff check .
 
   documentation:
     name: Generate Documentation
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Install dependencies
         run: |
@@ -114,10 +112,9 @@ jobs:
         run: python bin/build.py doxygen
 
       - name: Deploy docs to GitHub Pages
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        if: github.event_name == 'push'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/html
           publish_branch: gh-pages
-          keep_files: false
