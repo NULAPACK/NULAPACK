@@ -58,7 +58,7 @@ jobs:
         uses: pypa/gh-action-pypi-publish@v1.5.1
         with:
           user: __token__
-          packages-dir: wheels
+          packages_dir: wheels
 
       - name: GitHub Release
         if: github.ref_type == 'tag'

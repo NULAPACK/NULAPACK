@@ -42,11 +42,12 @@ dependencies = [
 ]
 
 [project.urls]
+homepage = "https://nulapack.github.io/NULAPACK"
+documentation = "https://nulapack.github.io/NULAPACK/files"
 source = "https://github.com/NULAPACK/NULAPACK"
-# TODO: add documentation URL
-# TODO: provide changelog URL from docs
 releasenotes = "https://github.com/NULAPACK/NULAPACK/releases/latest"
 issues = "https://github.com/NULAPACK/NULAPACK/issues"
+# TODO: provide changelog URL from docs
 
 [dependency-groups]
 dev = [
@@ -122,3 +123,7 @@ indent-style = "space"  # Options: "space" or "tab".
 line-ending = "auto"    # Options: "auto", "LF", "CRLF", or "CR".
 docstring-code-format = true
 docstring-code-line-length = "dynamic"
+
+[tool.cibuildwheel]
+# Skip 32-bit Windows builds due to Fortran/Meson compatibility issues
+skip = ["*-win32"]
