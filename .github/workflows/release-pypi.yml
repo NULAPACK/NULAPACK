@@ -15,18 +15,34 @@ permissions:
 
 jobs:
   build-and-release:
+    name: Build wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    environment: pypi
+    environment: release-pypi
+
     strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
       fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout source
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
+          ref: ${{ github.ref }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+
+      - name: Debug git ref and version
+        run: |
+          echo "GITHUB_REF=${GITHUB_REF}"
+          echo "GITHUB_REF_NAME=${GITHUB_REF_NAME}"
+          echo "GITHUB_SHA=${GITHUB_SHA}"
+          git status
+          git describe --tags --dirty --always || true
 
       - name: Install system dependencies (Linux)
         if: runner.os == 'Linux'
@@ -34,24 +50,32 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y gfortran build-essential cmake
 
-      - name: Install system dependencies (Windows)
+      - name: Verify system dependencies (Windows)
         if: runner.os == 'Windows'
         run: |
-          choco install mingw cmake -y
+          echo "Using preinstalled Windows toolchain"
+          cmake --version
+          where cmake
 
       - name: Install Python dependencies
         run: |
-          pip install --upgrade pip
-          pip install numpy cibuildwheel
+          python -m pip install --upgrade pip
+          python -m pip install numpy cibuildwheel==3.3.1
 
       - name: Build wheels
-        run: cibuildwheel --output-dir wheels
+        run: |
+          python -m cibuildwheel --output-dir wheels
+
+      - name: Upload wheels
+        uses: actions/upload-artifact@v4
+        with:
+          name: nulapack-${{ github.ref }}-${{ matrix.os }}
+          path: wheels/*.whl
 
       - name: Publish wheels to PyPI
         if: startsWith(github.ref, 'refs/tags/')
-        uses: pypa/gh-action-pypi-publish@v1.5.1
+        uses: pypa/gh-action-pypi-publish@v1.8.14
         with:
-          user: __token__
           packages_dir: wheels
 
       - name: GitHub Release

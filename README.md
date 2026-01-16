@@ -100,7 +100,7 @@ Building from source is useful if you want the latest features or need to modify
 * CMake ≥ 3.10
 * Fortran compiler (e.g. `gfortran`)
 * C/C++ compiler (e.g. `gcc`, `clang`)
-* Python ≥ 3.8
+* Python ≥ 3.9
 * uv
 
 **Build and install**
