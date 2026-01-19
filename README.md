@@ -80,13 +80,13 @@ hatch add nulapack
 
 ```toml
 [project.dependencies]
-nulapack = ">=1.0.0"
+nulapack = ">=0.1.0"
 ```
 
 `requirements.txt`:
 
 ```text
-nulapack>=1.0.0
+nulapack>=0.1.0
 ```
 
 ---
@@ -100,7 +100,7 @@ Building from source is useful if you want the latest features or need to modify
 * CMake ≥ 3.10
 * Fortran compiler (e.g. `gfortran`)
 * C/C++ compiler (e.g. `gcc`, `clang`)
-* Python ≥ 3.8
+* Python ≥ 3.9
 * uv
 
 **Build and install**

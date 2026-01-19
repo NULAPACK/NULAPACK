@@ -10,23 +10,30 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
 
 jobs:
-  build-and-release:
+  build:
+    name: Build wheels (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
-    environment: pypi
+
     strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
       fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout source
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
+          ref: ${{ github.ref }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
 
       - name: Install system dependencies (Linux)
         if: runner.os == 'Linux'
@@ -34,28 +41,51 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y gfortran build-essential cmake
 
-      - name: Install system dependencies (Windows)
+      - name: Verify system dependencies (Windows)
         if: runner.os == 'Windows'
         run: |
-          choco install mingw cmake -y
+          cmake --version
+          where cmake
 
       - name: Install Python dependencies
         run: |
-          pip install --upgrade pip
-          pip install numpy cibuildwheel
+          python -m pip install --upgrade pip
+          python -m pip install numpy cibuildwheel==3.3.1
 
       - name: Build wheels
-        run: cibuildwheel --output-dir wheels
+        run: |
+          python -m cibuildwheel --output-dir wheels
 
-      - name: Publish wheels to PyPI
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: pypa/gh-action-pypi-publish@v1.5.1
+      - name: Upload wheels
+        uses: actions/upload-artifact@v4
         with:
-          user: __token__
-          packages_dir: wheels
+          name: wheels-${{ matrix.os }}
+          path: wheels/*.whl
 
-      - name: GitHub Release
-        if: github.ref_type == 'tag'
+  publish:
+    name: Publish to PyPI
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi-publish
+
+    steps:
+      - name: Download wheels
+        uses: actions/download-artifact@v4
+        with:
+          path: wheels
+
+      - name: Unpack wheels
+        run: |
+          find wheels -mindepth 2 -type f -name "*.whl" -exec mv {} wheels/ \;
+          find wheels -mindepth 1 -type d -exec rm -rf {} +
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: wheels
+
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          files: wheels/*
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files: wheels/*.whl
