@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NULAPACK: Package Members</title>
+<title>NULAPACK: python.crout Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -48,7 +48,6 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
-</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -70,17 +69,57 @@ $(function() {
 </div>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespacepython.html">python</a></li><li class="navelem"><a class="el" href="namespacepython_1_1crout.html">crout</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">python.crout Namespace Reference</div></div>
+</div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all module members with links to the module documentation for each member:</div><ul>
-<li>__all__&#160;:&#160;<a class="el" href="namespacepython.html#a20b9780424f2291e796abe2ce8dc88c1">python</a></li>
-<li>__version__&#160;:&#160;<a class="el" href="namespacepython.html#aee2a99624848c7c1db9e9b7a2f001799">python</a></li>
-<li>cholesky()&#160;:&#160;<a class="el" href="namespacepython_1_1cholesky.html#aafca8607c68368eba793b8a81c11d25b">python.cholesky</a></li>
-<li>crout()&#160;:&#160;<a class="el" href="namespacepython_1_1crout.html#a9118e226e965c78e1fe6dba3f8458d96">python.crout</a></li>
-<li>doolittle()&#160;:&#160;<a class="el" href="namespacepython_1_1doolittle.html#afc4ca4debbb82dc2d4bbeaf33a911b45">python.doolittle</a></li>
-<li>gauss_seidel()&#160;:&#160;<a class="el" href="namespacepython_1_1gauss__seidel.html#a8907bf1cce76a6bb832da5c87ed69e45">python.gauss_seidel</a></li>
-<li>jacobi()&#160;:&#160;<a class="el" href="namespacepython_1_1jacobi.html#aec1a9358615515fac661789b07bf1fdf">python.jacobi</a></li>
-<li>thomas()&#160;:&#160;<a class="el" href="namespacepython_1_1thomas.html#a4ec3d0ad17f9ea5811c41df0c2088c6a">python.thomas</a></li>
-</ul>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a9118e226e965c78e1fe6dba3f8458d96" id="r_a9118e226e965c78e1fe6dba3f8458d96"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepython_1_1crout.html#a9118e226e965c78e1fe6dba3f8458d96">crout</a> (np.ndarray a)</td></tr>
+<tr class="separator:a9118e226e965c78e1fe6dba3f8458d96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a9118e226e965c78e1fe6dba3f8458d96" name="a9118e226e965c78e1fe6dba3f8458d96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9118e226e965c78e1fe6dba3f8458d96">&#9670;&#160;</a></span>crout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">python.crout.crout </td>
+          <td>(</td>
+          <td class="paramtype">np.ndarray&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Compute the LU Crout decomposition of a general matrix A.
+
+Parameters
+----------
+a : ndarray
+    Coefficient matrix (n x n) stored as a full matrix.
+
+Returns
+-------
+L : ndarray
+    Lower triangular matrix from the factorization.
+U : ndarray
+    Upper triangular matrix from the factorization (with ones on diagonal).
+info : int
+    0 if success, &lt;0 if a zero diagonal in L was detected.
+</pre> 
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
