@@ -57,7 +57,7 @@ jobs:
           python -m cibuildwheel --output-dir wheels
 
       - name: Upload wheels
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: wheels-${{ matrix.os }}
           path: wheels/*.whl
