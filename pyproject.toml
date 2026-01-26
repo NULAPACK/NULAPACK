@@ -3,8 +3,9 @@ name = "nulapack"
 dynamic = ['version']
 description = "NUmerical Linear Algebra PACKage"
 authors = [{ name = "Saud Zahir", email = "m.saud.zahir@gmail.com" }]
+maintainers = [{ name = "Saud Zahir", email = "m.saud.zahir@gmail.com" }]
 readme = "README.md"
-license = {file = "LICENSE"}
+license = "GPL-3.0-only"
 keywords = [
     "numerical",
     "linear",
@@ -14,7 +15,6 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: GNU Affero General Public License v3",
     'Programming Language :: Fortran',
     'Programming Language :: C',
     'Programming Language :: C++',
