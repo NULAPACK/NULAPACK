@@ -23,7 +23,7 @@ TEST_CASE("SGEJSV - SINGLE PRECISION JACOBI SOLVER", "[FLOAT32]") {
     printf("SGEJSV - SINGLE PRECISION JACOBI SOLVER\n");
     printf("\n");
 
-    JACOBI(&N, A, B, X, &max_iter, &tol, &status);
+    jacobi(&N, A, B, X, &max_iter, &tol, &status);
 
     for (int i = 0; i < N; i++) printf("X[%d] = %.6f\n", i, X[i]);
 
@@ -53,7 +53,7 @@ TEST_CASE("DGEJSV - DOUBLE PRECISION JACOBI SOLVER", "[FLOAT64]") {
     printf("DGEJSV - DOUBLE PRECISION JACOBI SOLVER\n");
     printf("\n");
 
-    JACOBI(&N, A, B, X, &max_iter, &tol, &status);
+    jacobi(&N, A, B, X, &max_iter, &tol, &status);
 
     for (int i = 0; i < N; i++) printf("X[%d] = %.12lf\n", i, X[i]);
 
@@ -84,7 +84,7 @@ TEST_CASE("CGEJSV - COMPLEX FLOAT JACOBI SOLVER", "[COMPLEX64]") {
     printf("CGEJSV - COMPLEX FLOAT JACOBI SOLVER\n");
     printf("\n");
 
-    JACOBI(&N, A, B, X, &max_iter, &tol, &status);
+    jacobi(&N, A, B, X, &max_iter, &tol, &status);
 
     for (int i = 0; i < N; i++) {
         printf("X[%d] = (%.6f, %.6f)\n", i, X[i].real(), X[i].imag());
@@ -121,7 +121,7 @@ TEST_CASE("ZGEJSV - COMPLEX DOUBLE JACOBI SOLVER", "[COMPLEX128]") {
     printf("ZGEJSV - COMPLEX DOUBLE JACOBI SOLVER\n");
     printf("\n");
 
-    JACOBI(&N, A, B, X, &max_iter, &tol, &status);
+    jacobi(&N, A, B, X, &max_iter, &tol, &status);
 
     for (int i = 0; i < N; i++) {
         printf("X[%d] = (%.12lf, %.12lf)\n", i, X[i].real(), X[i].imag());

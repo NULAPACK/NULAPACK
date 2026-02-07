@@ -19,7 +19,7 @@ TEST_CASE("SPOCTRF - SINGLE PRECISION CHOLESKY FACTORIZATION", "[FLOAT32]") {
 
     printf("\n--- TEST CASE ---\nSPOCTRF - SINGLE PRECISION CHOLESKY FACTORIZATION\n\n");
 
-    CHOLESKY(&N, A, L, &LDA, &status);
+    cholesky(&N, A, L, &LDA, &status);
 
     REQUIRE(status == 0);
 
@@ -48,7 +48,7 @@ TEST_CASE("DPOCTRF - DOUBLE PRECISION CHOLESKY FACTORIZATION", "[FLOAT64]") {
 
     printf("\n--- TEST CASE ---\nDPOCTRF - DOUBLE PRECISION CHOLESKY FACTORIZATION\n\n");
 
-    CHOLESKY(&N, A, L, &LDA, &status);
+    cholesky(&N, A, L, &LDA, &status);
 
     REQUIRE(status == 0);
 
@@ -77,7 +77,7 @@ TEST_CASE("CPOCTRF - COMPLEX FLOAT CHOLESKY FACTORIZATION", "[COMPLEX64]") {
 
     printf("\n--- TEST CASE ---\nCPOCTRF - COMPLEX FLOAT CHOLESKY FACTORIZATION\n\n");
 
-    CHOLESKY(&N, A, L, &LDA, &status);
+    cholesky(&N, A, L, &LDA, &status);
 
     REQUIRE(status == 0);
 
@@ -107,7 +107,7 @@ TEST_CASE("ZPOCTRF - COMPLEX DOUBLE CHOLESKY FACTORIZATION", "[COMPLEX128]") {
 
     printf("\n--- TEST CASE ---\nZPOCTRF - COMPLEX DOUBLE CHOLESKY FACTORIZATION\n\n");
 
-    CHOLESKY(&N, A, L, &LDA, &status);
+    cholesky(&N, A, L, &LDA, &status);
 
     REQUIRE(status == 0);
 

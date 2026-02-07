@@ -147,7 +147,7 @@ int main() {
     std::vector<double> u(n * n, 0.0);
     int info;
 
-    DOOLITTLE(&n, a.data(), l.data(), u.data(), &info);
+    doolittle(&n, a.data(), l.data(), u.data(), &info);
 
     if (info == 0) {
         // Use l and u

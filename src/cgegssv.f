@@ -1,4 +1,13 @@
 C     ====================================================================
+C                            N U L A P A C K
+C                            U U L A P A C K
+C                            L L L A P A C K
+C                            A A A A P A C K
+C                            P P P P P A C K
+C                            A A A A A A C K
+C                            C C C C C C C K
+C                            K K K K K K K K
+C
 C     This file is part of NULAPACK - NUmerical Linear Algebra PACKage
 C
 C     Copyright (C) 2025  Saud Zahir

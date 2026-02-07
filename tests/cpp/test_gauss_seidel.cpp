@@ -23,7 +23,7 @@ TEST_CASE("SGEGSSV - SINGLE PRECISION GAUSS-SEIDEL SOLVER", "[FLOAT32]") {
     printf("SGEGSSV - SINGLE PRECISION GAUSS-SEIDEL SOLVER\n");
     printf("\n");
 
-    GAUSS_SEIDEL(&N, A, B, X, &max_iter, &tol, &status);
+    gaussSeidel(&N, A, B, X, &max_iter, &tol, &status);
 
     for (int i = 0; i < N; i++) printf("X[%d] = %.6f\n", i, X[i]);
 
@@ -53,7 +53,7 @@ TEST_CASE("DGEGSSV - DOUBLE PRECISION GAUSS-SEIDEL SOLVER", "[FLOAT64]") {
     printf("DGEGSSV - DOUBLE PRECISION GAUSS-SEIDEL SOLVER\n");
     printf("\n");
 
-    GAUSS_SEIDEL(&N, A, B, X, &max_iter, &tol, &status);
+    gaussSeidel(&N, A, B, X, &max_iter, &tol, &status);
 
     for (int i = 0; i < N; i++) printf("X[%d] = %.12lf\n", i, X[i]);
 
@@ -84,7 +84,7 @@ TEST_CASE("CGEGSSV - COMPLEX FLOAT GAUSS-SEIDEL SOLVER", "[COMPLEX64]") {
     printf("CGEGSSV - COMPLEX FLOAT GAUSS-SEIDEL SOLVER\n");
     printf("\n");
 
-    GAUSS_SEIDEL(&N, A, B, X, &max_iter, &tol, &status);
+    gaussSeidel(&N, A, B, X, &max_iter, &tol, &status);
 
     for (int i = 0; i < N; i++) {
         printf("X[%d] = (%.6f, %.6f)\n", i, X[i].real(), X[i].imag());
@@ -121,7 +121,7 @@ TEST_CASE("ZGEGSSV - COMPLEX DOUBLE GAUSS-SEIDEL SOLVER", "[COMPLEX128]") {
     printf("ZGEGSSV - COMPLEX DOUBLE GAUSS-SEIDEL SOLVER\n");
     printf("\n");
 
-    GAUSS_SEIDEL(&N, A, B, X, &max_iter, &tol, &status);
+    gaussSeidel(&N, A, B, X, &max_iter, &tol, &status);
 
     for (int i = 0; i < N; i++) {
         printf("X[%d] = (%.12lf, %.12lf)\n", i, X[i].real(), X[i].imag());

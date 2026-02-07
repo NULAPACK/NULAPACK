@@ -18,7 +18,7 @@ TEST_CASE("SGTTSV - SINGLE PRECISION THOMAS SOLVER", "[FLOAT32]") {
 
     printf("\n--- TEST CASE ---\nSGTTSV - SINGLE PRECISION THOMAS SOLVER\n\n");
 
-    THOMAS(&N, A, B, X, &status);
+    thomas(&N, A, B, X, &status);
 
     for (int i = 0; i < N; i++) printf("X[%d] = %.6f\n", i, X[i]);
 
@@ -43,7 +43,7 @@ TEST_CASE("DGTTSV - DOUBLE PRECISION THOMAS SOLVER", "[FLOAT64]") {
 
     printf("\n--- TEST CASE ---\nDGTTSV - DOUBLE PRECISION THOMAS SOLVER\n\n");
 
-    THOMAS(&N, A, B, X, &status);
+    thomas(&N, A, B, X, &status);
 
     for (int i = 0; i < N; i++) printf("X[%d] = %.12lf\n", i, X[i]);
 
@@ -69,7 +69,7 @@ TEST_CASE("CGTTSV - COMPLEX FLOAT THOMAS SOLVER", "[COMPLEX64]") {
 
     printf("\n--- TEST CASE ---\nCGTTSV - COMPLEX FLOAT THOMAS SOLVER\n\n");
 
-    THOMAS(&N, A, B, X, &status);
+    thomas(&N, A, B, X, &status);
 
     for (int i = 0; i < N; i++) {
         printf("X[%d] = (%.6f, %.6f)\n", i, X[i].real(), X[i].imag());
@@ -101,7 +101,7 @@ TEST_CASE("ZGTTSV - COMPLEX DOUBLE THOMAS SOLVER", "[COMPLEX128]") {
 
     printf("\n--- TEST CASE ---\nZGTTSV - COMPLEX DOUBLE THOMAS SOLVER\n\n");
 
-    THOMAS(&N, A, B, X, &status);
+    thomas(&N, A, B, X, &status);
 
     for (int i = 0; i < N; i++) {
         printf("X[%d] = (%.12lf, %.12lf)\n", i, X[i].real(), X[i].imag());

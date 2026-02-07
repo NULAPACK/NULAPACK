@@ -18,7 +18,7 @@ TEST_CASE("SGEDTRF - SINGLE PRECISION DOOLITTLE DECOMPOSITION", "[FLOAT32]") {
 
     printf("\n--- TEST CASE ---\nSGEDTRF - SINGLE PRECISION DOOLITTLE DECOMPOSITION\n\n");
 
-    DOOLITTLE(&N, A, L, U, &status);
+    doolittle(&N, A, L, U, &status);
 
     REQUIRE(status == 0);
 
@@ -47,7 +47,7 @@ TEST_CASE("DGEDTRF - DOUBLE PRECISION DOOLITTLE DECOMPOSITION", "[FLOAT64]") {
 
     printf("\n--- TEST CASE ---\nDGEDTRF - DOUBLE PRECISION DOOLITTLE DECOMPOSITION\n\n");
 
-    DOOLITTLE(&N, A, L, U, &status);
+    doolittle(&N, A, L, U, &status);
 
     REQUIRE(status == 0);
 
@@ -75,7 +75,7 @@ TEST_CASE("CGEDTRF - COMPLEX FLOAT DOOLITTLE DECOMPOSITION", "[COMPLEX64]") {
 
     printf("\n--- TEST CASE ---\nCGEDTRF - COMPLEX FLOAT DOOLITTLE DECOMPOSITION\n\n");
 
-    DOOLITTLE(&N, A, L, U, &status);
+    doolittle(&N, A, L, U, &status);
 
     REQUIRE(status == 0);
 
@@ -104,7 +104,7 @@ TEST_CASE("ZGEDTRF - COMPLEX DOUBLE DOOLITTLE DECOMPOSITION", "[COMPLEX128]") {
 
     printf("\n--- TEST CASE ---\nZGEDTRF - COMPLEX DOUBLE DOOLITTLE DECOMPOSITION\n\n");
 
-    DOOLITTLE(&N, A, L, U, &status);
+    doolittle(&N, A, L, U, &status);
 
     REQUIRE(status == 0);
 

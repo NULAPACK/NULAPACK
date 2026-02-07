@@ -18,7 +18,7 @@ TEST_CASE("SGECTRF - SINGLE PRECISION CROUT DECOMPOSITION", "[FLOAT32]") {
 
     printf("\n--- TEST CASE ---\nSGECTRF - SINGLE PRECISION CROUT DECOMPOSITION\n\n");
 
-    CROUT(&N, A, L, U, &status);
+    crout(&N, A, L, U, &status);
 
     REQUIRE(status == 0);
 
@@ -52,7 +52,7 @@ TEST_CASE("DGECTRF - DOUBLE PRECISION CROUT DECOMPOSITION", "[FLOAT64]") {
 
     printf("\n--- TEST CASE ---\nDGECTRF - DOUBLE PRECISION CROUT DECOMPOSITION\n\n");
 
-    CROUT(&N, A, L, U, &status);
+    crout(&N, A, L, U, &status);
 
     REQUIRE(status == 0);
 
@@ -85,7 +85,7 @@ TEST_CASE("CGECTRF - COMPLEX FLOAT CROUT DECOMPOSITION", "[COMPLEX64]") {
 
     printf("\n--- TEST CASE ---\nCGECTRF - COMPLEX FLOAT CROUT DECOMPOSITION\n\n");
 
-    CROUT(&N, A, L, U, &status);
+    crout(&N, A, L, U, &status);
 
     REQUIRE(status == 0);
 
@@ -120,7 +120,7 @@ TEST_CASE("ZGECTRF - COMPLEX DOUBLE CROUT DECOMPOSITION", "[COMPLEX128]") {
 
     printf("\n--- TEST CASE ---\nZGECTRF - COMPLEX DOUBLE CROUT DECOMPOSITION\n\n");
 
-    CROUT(&N, A, L, U, &status);
+    crout(&N, A, L, U, &status);
 
     REQUIRE(status == 0);
 

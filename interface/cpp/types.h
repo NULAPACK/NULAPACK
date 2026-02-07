@@ -1,3 +1,33 @@
+/*
+ * ====================================================================
+ *                           N U L A P A C K
+ *                           U U L A P A C K
+ *                           L L L A P A C K
+ *                           A A A A P A C K
+ *                           P P P P P A C K
+ *                           A A A A A A C K
+ *                           C C C C C C C K
+ *                           K K K K K K K K
+ *
+ *  This file is part of NULAPACK - NUmerical Linear Algebra PACKage
+ *
+ *  Copyright (C) 2025  Saud Zahir
+ *
+ *  NULAPACK is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  NULAPACK is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with NULAPACK.  If not, see <https://www.gnu.org/licenses/>.
+ * ====================================================================
+ */
+
 #ifndef FORTRAN_TYPES_H
 #define FORTRAN_TYPES_H
 
@@ -14,7 +44,7 @@
   typedef double _Complex complex_double;
 #endif
 
-/* Accessors for real/imaginary parts */
+// Accessors for real/imaginary parts
 #ifndef complex_float_real
   #define complex_float_real(z)   (crealf(z))
 #endif
@@ -28,7 +58,7 @@
   #define complex_double_imag(z)  (cimag(z))
 #endif
 
-/* Integer type — default is 32-bit, override with -DFORTRAN_ILP64 if needed */
+// Integer type — default is 32-bit, override with -DFORTRAN_ILP64 if needed
 #ifdef FORTRAN_ILP64
   typedef int64_t fortran_int;
   #define FORTRAN_IFMT PRId64
@@ -39,13 +69,13 @@
 
 typedef fortran_int fortran_logical;
 
-/* Fortran-style type aliases */
+// Fortran-style type aliases
 typedef float           fortran_real;
 typedef double          fortran_double;
 typedef complex_float   fortran_complex;
 typedef complex_double  fortran_double_complex;
 
-/* Aliases matching traditional Fortran naming */
+// Aliases matching traditional Fortran naming
 #define REAL            fortran_real
 #define DOUBLE          fortran_double
 #define COMPLEX         fortran_complex
@@ -53,7 +83,7 @@ typedef complex_double  fortran_double_complex;
 #define INTEGER         fortran_int
 #define LOGICAL         fortran_logical
 
-/* Optional: function pointer types for selector functions */
+// Optional: function pointer types for selector functions
 typedef LOGICAL (*SELECT_REAL_2)(const REAL*, const REAL*);
 typedef LOGICAL (*SELECT_REAL_3)(const REAL*, const REAL*, const REAL*);
 typedef LOGICAL (*SELECT_DOUBLE_2)(const DOUBLE*, const DOUBLE*);
